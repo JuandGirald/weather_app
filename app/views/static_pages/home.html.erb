@@ -1,0 +1,64 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Weather App</a>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="mt-5">
+    <h1 class="text-center"> Get the instant weather of a city!</h1>
+
+    <%= form_tag root_path, :method => :get, :utf8_enforce_tag => false, class: "input-group container" do %>
+      <%= text_field_tag :city, params[:city], { class: "form-control", placeholder: "Write a city", required: true } %>
+      <%= text_field_tag :country, params[:country], { class: "form-control", placeholder: "Write the country that belongs the city" } %>
+      <span class="input-group-btn">
+        <%= submit_tag 'Get weather', class: "btn btn-secondary"  %>
+      </span>
+    <% end %>
+    
+    <% if @weather_data %> 
+      <div class="col-md-6 offset-sm-3">
+        <div class="card text-center">
+          <h2 class="justify-content-center" style="padding-top: 1em;"> <%= @weather_data['name'] %> </h2>
+          <h4 class="text-center"> <%= @main_weather['temp'] %> <h6>celcius</h6> </h4>
+          <p class="card-text"> <%= @metrics_weather['description'] %></p>
+          <div class="card-block  text-left">
+            <table class="table table-striped mt-5">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>pressure</th>
+                <th>Humidity</th>
+                <th>Temp Min</th>
+                <th>Temp Max</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>  
+                <td> <img class="card-img-top" src="http://openweathermap.org/img/w/<%= @metrics_weather['icon'] %>.png" alt="Card image cap"> </td>
+                <td> <%= @main_weather['pressure'] %> </td>
+                <td> <%= @main_weather['humidity'] %> </td>
+                <td> <%= @main_weather['temp_min'] %> </td>
+                <td> <%= @main_weather['temp_max'] %> </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    <% elsif @errors %>
+      <h1><%= @errors %></h1>
+    <% end %>
+  </div>
+
+</div>
