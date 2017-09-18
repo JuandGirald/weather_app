@@ -21,6 +21,14 @@ RSpec.describe StaticPagesController, type: :controller do
       expect(assigns(:main_weather)['temp']).not_to be_nil
     end
 
+    it "returns http success from a random city" do
+      get :home, params: { :random => true }
+
+      expect(response).to have_http_status(:success)
+      expect(assigns(:weather_data)['name']).not_to be_empty
+      expect(assigns(:main_weather)['temp']).not_to be_nil
+    end
+
     it "returns errors when the city is not found" do
       get :home, params: { :city => "hhhhhhhhhhhhhhh" }
 
