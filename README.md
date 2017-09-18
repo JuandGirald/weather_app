@@ -1,24 +1,46 @@
-# README
+# Weather APP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a weather app for CarrerFoundry
 
-Things you may want to cover:
+## Installing
 
-* Ruby version
+Inside your project, run this command:
 
-* System dependencies
+```
+Bundle install
+```
+## Database
 
-* Configuration
+The project use PostgreSQL as database. Setup your local database and modify database.yml file with your credentials, then run:
 
-* Database creation
+```
+rake db:migrate
+```
 
-* Database initialization
+then run:
 
-* How to run the test suite
+```
+rails server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Running the tests
 
-* ...
+
+run the tests!
+
+```
+rspec
+```
+
+## Points to improve
+
+* Get a better ui and user experience.
+* Better error handling for the not found cities. Right now only depends from the API response.
+* Include capybara tests.
+* Add cache the fetched weather data.
+
+## Authors
+
+* **Juan David Giraldo** - *Initial work* - [JuanGiraldo](https://github.com/JuandGirald)
+
