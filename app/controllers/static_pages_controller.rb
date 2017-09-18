@@ -1,7 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
-    if params[:city]
-      if params[:city] || params[:country]
+    if params[:random] || params[:city]
+      if params[:random]
+       response = OpenWeatherApi.new(Random.city)
+      elsif params[:city] || params[:country]
         response = OpenWeatherApi.new(params[:city], params[:country])
       end
 

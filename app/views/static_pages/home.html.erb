@@ -24,6 +24,7 @@
       <span class="input-group-btn">
         <%= submit_tag 'Get weather', class: "btn btn-secondary"  %>
       </span>
+      <%= link_to 'Random Weather', {:controller => "static_pages", :action => "home", :random => true}, method: :get, class: "btn btn-secondary" %>  
     <% end %>
     
     <% if @weather_data %> 
