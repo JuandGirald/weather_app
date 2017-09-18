@@ -4,16 +4,20 @@ class OpenWeatherApi
   include HTTParty
   base_uri 'api.openweathermap.org/data/2.5/weather'
 
+  attr_reader   :errors
+
   def initialize(city, country = '')
     @options = { query: { q: "#{city},#{country}",
                           APIKEY: api_key,
                           units: 'metric' } }
     @data = {}
+    @errors = ActiveModel::Errors.new(self)
   end
 
   # parse and get response data from the weather API
   def call
     @data = parse_response(self.class.get('', @options))
+    validate!
   end
 
   def weather_data
@@ -28,6 +32,10 @@ class OpenWeatherApi
   end
 
   private
+    def validate!
+      errors.add(:city, "not found") if @data['cod'] != 200
+    end
+
     def parse_response(data)
       data.parsed_response
     end
